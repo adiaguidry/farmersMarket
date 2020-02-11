@@ -4,8 +4,10 @@ import * as createAction from "../actions/farmActions";
 import Modal from "@material-ui/core/Modal";
 import veggie from "../images/orange.svg";
 import { A } from "hookrouter";
+import afro from "../images/afro.png";
+import red from "../images/red.png";
 
-const FarmersList = ({ farm }) => {
+const FarmersList = ({ farm, produce }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -44,11 +46,12 @@ const FarmersList = ({ farm }) => {
             <div className="col-md-6 col-sm-12">
               <h6>The Goods</h6>
               <ul className="produceList">
-                {farm.produce.map(p => (
-                  <li key={p.id} className="mx-1">
-                    {p.text}
-                  </li>
-                ))}
+                {produce &&
+                  produce.map(p => (
+                    <li key={p.id} className="mx-1">
+                      {p.text}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -89,9 +92,8 @@ const FarmersList = ({ farm }) => {
                     <div>
                       What we grow:
                       <ul className="produceList">
-                        {farm.produce.map(p => (
-                          <li key={p.id}>{p.text}</li>
-                        ))}
+                        {produce &&
+                          produce.map(p => <li key={p.id}>{p.text}</li>)}
                       </ul>
                     </div>
                   </div>

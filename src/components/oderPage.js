@@ -8,7 +8,7 @@ const OrderPage = () => {
     <div>
       <div className="row">
         <div
-          className="offset-md-4 col-md-10"
+          className="offset-md-2 col-md-10"
           style={{ backgroundColor: "#9fedd7" }}
         >
           <div className="m-4">

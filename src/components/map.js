@@ -29,16 +29,17 @@ const MyMap = ({ selectedFarm, farms }) => {
           setViewport(viewport);
         }}
       >
-        {farms.map(farm => (
-          <Marker key={farm.name} latitude={farm.lat} longitude={farm.long}>
-            <button
-              style={styles.locationIcon}
-              onClick={() => dispatch(createAction.selectFarmer(farm))}
-            >
-              <LocationOnIcon className="fas fa-seedling fa-xl"></LocationOnIcon>
-            </button>
-          </Marker>
-        ))}
+        {farms &&
+          farms.map(farm => (
+            <Marker key={farm.name} latitude={farm.lat} longitude={farm.long}>
+              <button
+                style={styles.locationIcon}
+                onClick={() => dispatch(createAction.selectFarmer(farm))}
+              >
+                <LocationOnIcon className="fas fa-seedling fa-xl"></LocationOnIcon>
+              </button>
+            </Marker>
+          ))}
         {selectedFarm && (
           <Popup
             latitude={selectedFarm.lat}

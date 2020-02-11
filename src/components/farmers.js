@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyMap from "./map";
 import PageHeader from "./pageHeader";
 import FarmersList from "./farmersList";
@@ -8,6 +8,10 @@ const Farmers = () => {
   const farms = useSelector(state => state.farms.farms);
   const selectedFarm = useSelector(state => state.farms.selectedFarm);
 
+  useEffect(() => {
+    console.log("farm", farms);
+  }, [farms]);
+
   return (
     <React.Fragment>
       <PageHeader />
@@ -16,13 +20,15 @@ const Farmers = () => {
           <MyMap selectedFarm={selectedFarm} farms={farms} />
         </div>
         <div className="col-md-8">
-          {farms.map(farm => (
-            <FarmersList
-              key={farm.name}
-              farm={farm}
-              selectedFarm={selectedFarm}
-            />
-          ))}
+          {farms &&
+            farms.map(farm => (
+              <FarmersList
+                key={farm.name}
+                farm={farm}
+                produce={farm.produce}
+                selectedFarm={selectedFarm}
+              />
+            ))}
         </div>
       </div>
     </React.Fragment>

@@ -1,4 +1,5 @@
 const initalState = {
+  id: null,
   firstName: "",
   lastName: "",
   order: {
@@ -23,6 +24,7 @@ const customerReducer = (state = initalState, action) => {
 
       return newState;
     case "REGISTRATION":
+      newState.id = Date.now();
       newState.firstName = action.payload.firstName;
       newState.lastName = action.payload.lastName;
       return newState;

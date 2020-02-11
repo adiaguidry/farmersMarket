@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as customerAction from "../actions/customerActions";
+import OrderPage from "./oderPage";
 
 const RegForm = () => {
+  const [success, setSuccess] = useState(false);
+  const customer = useSelector(state => state.customer);
   const [account, setAccount] = useState({
     firstName: "",
     lastName: "",
@@ -12,9 +15,13 @@ const RegForm = () => {
     password: ""
   });
   const [error, setError] = useState({});
-  useEffect(() => {
-    console.log(error === {}, error === null, error);
-  }, [error]);
+  useEffect(
+    () => {
+      console.log(customer);
+    },
+    [error],
+    [customer]
+  );
 
   const schema = {
     firstName: Joi.string()
@@ -73,6 +80,7 @@ const RegForm = () => {
   const storeData = () => {
     localStorage.setItem("account", JSON.stringify(account));
     dispatch(customerAction.registration(account));
+    setSuccess(true);
   };
 
   const handleSubmit = e => {
@@ -85,44 +93,51 @@ const RegForm = () => {
   };
 
   return (
-    <div className="col-md-10 m-4" style={{ backgroundColor: "#efe9e99e" }}>
+    <div className="col-md-10 m-4">
       <div className="m-4">
-        <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <Input
-              name="firstName"
-              label="First Name"
-              type="text"
-              errorName={error.firstName}
-              handleChange={handleChange}
-            />
-            <Input
-              name="lastName"
-              label="Last Name"
-              type="text"
-              errorName={error.lastName}
-              handleChange={handleChange}
-            />
-            <Input
-              name="email"
-              label="Email"
-              type="text"
-              errorName={error.email}
-              handleChange={handleChange}
-            />
-            <Input
-              name="password"
-              label="Password"
-              type="password"
-              errorName={error.password}
-              handleChange={handleChange}
-            />
-          </div>
+        {!success ? (
+          <form
+            onSubmit={handleSubmit}
+            style={{ backgroundColor: "#efe9e99e", padding: "3rem" }}
+          >
+            <div className="form-row">
+              <Input
+                name="firstName"
+                label="First Name"
+                type="text"
+                errorName={error.firstName}
+                handleChange={handleChange}
+              />
+              <Input
+                name="lastName"
+                label="Last Name"
+                type="text"
+                errorName={error.lastName}
+                handleChange={handleChange}
+              />
+              <Input
+                name="email"
+                label="Email"
+                type="text"
+                errorName={error.email}
+                handleChange={handleChange}
+              />
+              <Input
+                name="password"
+                label="Password"
+                type="password"
+                errorName={error.password}
+                handleChange={handleChange}
+              />
+            </div>
 
-          <button type="submit" className="btn button">
-            Register
-          </button>
-        </form>
+            <button type="submit" className="btn button">
+              Register
+            </button>
+          </form>
+        ) : (
+          <OrderPage />
+        )}
       </div>
     </div>
   );
