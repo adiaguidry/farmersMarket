@@ -4,7 +4,8 @@ import logo from "../images/fruit.svg";
 import { useSelector } from "react-redux";
 
 const Nav = () => {
-  const customer = useSelector(state => state.customer);
+  const user = useSelector(state => state.users.currentUser);
+  const selectedFarm = useSelector(state => state.farm);
   return (
     <div className="container">
       <nav
@@ -24,7 +25,7 @@ const Nav = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className="navbar-toggler-icon fas fa-bars"></i>
         </button>
         <div
           className="collapse navbar-collapse"
@@ -45,14 +46,20 @@ const Nav = () => {
           </ul>
         </div>
 
-        {customer.firstName !== "" && (
+        {user.firstName ? (
           <div
             className="d-flex justify-content-end collapse navbar-collapse"
             id="navbarNavAltMarkup"
           >
-            <h5 className="m-2">Welcome {customer.firstName}</h5>
-            <button className="btn btn-sm ">
-              <a> Sign Out </a>
+            <h5 className="m-2">Welcome {user.firstName}</h5>
+            <button className="btn btn-sm">
+              <a> Logut </a>
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button className="btn btn-sm">
+              <a> LogIn </a>
             </button>
           </div>
         )}

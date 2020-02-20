@@ -21,7 +21,6 @@ const listReducer = (state = initialState, action) => {
           list.cards = [];
         }
       });
-      console.log(newState[1]);
       return newState;
     }
     case "ADD_CARD": {

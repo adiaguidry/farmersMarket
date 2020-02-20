@@ -6,6 +6,10 @@ import veggie from "../images/orange.svg";
 import { A } from "hookrouter";
 import afro from "../images/afro.png";
 import red from "../images/red.png";
+import burnett from "../images/burnett.png";
+import hat from "../images/hat.png";
+import beard from "../images/beard.png";
+import blonde from "../images/blonde.png";
 
 const FarmersList = ({ farm, produce }) => {
   const dispatch = useDispatch();
@@ -93,7 +97,11 @@ const FarmersList = ({ farm, produce }) => {
                       What we grow:
                       <ul className="produceList">
                         {produce &&
-                          produce.map(p => <li key={p.id}>{p.text}</li>)}
+                          produce.map(p => (
+                            <li key={p.id} className="mx-1">
+                              {p.text}
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   </div>

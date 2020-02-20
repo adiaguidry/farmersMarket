@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import listReducer from "./listReducer";
 import farmReducer from "./farmReducer";
-import customerReducer from "./customerReducer";
+import userReducer from "./userReducer";
 
 export default combineReducers({
   lists: listReducer,
   farms: farmReducer,
-  customer: customerReducer
+  users: userReducer
 });

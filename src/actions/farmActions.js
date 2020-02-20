@@ -11,7 +11,8 @@ export const getFarms = farms => {
 export const initialState = () => {
   return dispatch => {
     axios.get("/api/farmsdb").then(response => {
-      dispatch(getFarms(response.data));
+      console.log("action", response.data[0]);
+      dispatch(getFarms(response.data[0]));
     });
   };
 };

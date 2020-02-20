@@ -3,7 +3,8 @@ import Joi from "joi-browser";
 import Input from "./input";
 import { useDispatch, useSelector } from "react-redux";
 import * as customerAction from "../actions/customerActions";
-import OrderPage from "./oderPage";
+import * as userAction from "../actions/userActions";
+import Banner from "./banner";
 
 const RegForm = () => {
   const [success, setSuccess] = useState(false);
@@ -78,8 +79,7 @@ const RegForm = () => {
   };
 
   const storeData = () => {
-    localStorage.setItem("account", JSON.stringify(account));
-    dispatch(customerAction.registration(account));
+    dispatch(userAction.registerUser(account));
     setSuccess(true);
   };
 
@@ -87,9 +87,7 @@ const RegForm = () => {
     e.preventDefault();
     const result = validateForm();
 
-    Object.keys(result).length === 0
-      ? storeData()
-      : console.log("not successfully");
+    Object.keys(result).length === 0 ? storeData() : setError(result);
   };
 
   return (
@@ -98,13 +96,14 @@ const RegForm = () => {
         {!success ? (
           <form
             onSubmit={handleSubmit}
-            style={{ backgroundColor: "#efe9e99e", padding: "3rem" }}
+            style={{ backgroundColor: "#efe9e99e" }}
           >
             <div className="form-row">
               <Input
                 name="firstName"
                 label="First Name"
                 type="text"
+                value={account.firstName}
                 errorName={error.firstName}
                 handleChange={handleChange}
               />
@@ -112,6 +111,7 @@ const RegForm = () => {
                 name="lastName"
                 label="Last Name"
                 type="text"
+                value={account.lastName}
                 errorName={error.lastName}
                 handleChange={handleChange}
               />
@@ -119,6 +119,7 @@ const RegForm = () => {
                 name="email"
                 label="Email"
                 type="text"
+                value={account.email}
                 errorName={error.email}
                 handleChange={handleChange}
               />
@@ -126,6 +127,7 @@ const RegForm = () => {
                 name="password"
                 label="Password"
                 type="password"
+                value={account.password}
                 errorName={error.password}
                 handleChange={handleChange}
               />
@@ -136,7 +138,11 @@ const RegForm = () => {
             </button>
           </form>
         ) : (
-          <OrderPage />
+          <Banner
+            text={
+              "Welcome, lets get you going! Head over to checkout your local farmers."
+            }
+          />
         )}
       </div>
     </div>

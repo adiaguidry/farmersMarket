@@ -5,7 +5,6 @@ import "../components/style.scss";
 import Nav from "./nav";
 import { useRoutes } from "hookrouter";
 import routes from "../routes/routes";
-import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();

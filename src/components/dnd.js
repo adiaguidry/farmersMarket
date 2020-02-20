@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import WorkList from "./WorkList";
 import { useSelector, useDispatch } from "react-redux";
 import * as createAction from "../actions/listActions";
-import * as createOrderAction from "../actions/customerActions";
+import * as createOrderAction from "../actions/userActions";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { sort } from "../actions/listActions";
 import Modal from "@material-ui/core/Modal";
 
 function DND() {
+  const [loggedIn, setLogin] = useState(true);
   //handle modal for box info
   const [open, setOpen] = useState(false);
+  const user = useSelector(state => state.users.currentUser);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -27,8 +29,18 @@ function DND() {
   }, [selectedFarm]);
 
   const handleOrder = () => {
-    dispatch(createOrderAction.completeOrder(lists[1].cards, selectedFarm));
-    dispatch(createAction.removeCard());
+    if (user._id) {
+      let order = {
+        complete: true,
+        produce: lists[1].cards,
+        farmer: selectedFarm.name,
+        location: selectedFarm.location
+      };
+      dispatch(createOrderAction.completeOrder(user._id, order));
+      dispatch(createAction.removeCard());
+    } else {
+      setLogin(false);
+    }
   };
 
   const onDragEnd = result => {
@@ -54,6 +66,12 @@ function DND() {
   return (
     <React.Fragment>
       <div className="text-center">
+        {!loggedIn && (
+          <div className="alert alert-danger" role="alert">
+            Please login to complete your order.
+          </div>
+        )}
+
         <h1 onClick={handleOpen}>Create Your Produce Box </h1>
         {selectedFarm ? (
           <h2>

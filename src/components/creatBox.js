@@ -2,17 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import DND from "./dnd";
-import OrderPage from "./oderPage";
+import Banner from "./banner";
 
 function CreateBox() {
-  const customer = useSelector(state => state.customer);
+  const user = useSelector(state => state.users.currentUser);
 
-  useEffect(() => {}, [customer]);
+  useEffect(() => {
+    console.log("user order complete", user.order);
+  }, [user]);
 
   return (
     <div className="row text-center" style={{ marginTop: "8rem" }}>
       <div className="offset-md-2">
-        {customer.order.complete === true ? <OrderPage /> : <DND />}
+        {user.order && user.order.complete === true ? (
+          <Banner
+            text={
+              "Thank you for you order! Your box of will be ready in 7 days. Includes:"
+            }
+          />
+        ) : (
+          <DND />
+        )}
       </div>
     </div>
   );

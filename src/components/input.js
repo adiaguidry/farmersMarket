@@ -2,7 +2,7 @@ import React from "react";
 
 const Input = ({ name, label, type, handleChange, value, errorName }) => {
   return (
-    <div className="form-group col-md-6">
+    <div className={"form-group col-md-12"}>
       <label htmlFor={name}>{label}</label>
       <input
         type={type}

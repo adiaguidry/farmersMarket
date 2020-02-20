@@ -9,10 +9,7 @@ const Home = () => {
     <div className="jumbotron">
       <div className="row mt-4">
         {started === "welcome" ? (
-          <div
-            className="col-md-10 m-4"
-            style={{ backgroundColor: "#efe9e99e" }}
-          >
+          <div className="col-md-10" style={{ backgroundColor: "#efe9e99e" }}>
             <div className="m-4">
               <h3 className="display-4">Welcome</h3>
               <h1 className="display-4">California Online Farmers Market</h1>

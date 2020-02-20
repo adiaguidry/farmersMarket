@@ -4,6 +4,13 @@ $yellow: #f4cf49;
 $lighYellow: #feec88;
 $grey: #edeae5;
 
+html,
+body,
+.wrapper {
+  margin: 0;
+  padding: 0;
+}
+
 nav {
   display: flex;
   justify-content: space-evenly;
@@ -99,7 +106,10 @@ p,
   background-repeat: no-repeat;
   background-size: cover;
   color: #444;
-  height: 100vh;
+
+  div {
+    margin: 1rem 0 0 0;
+  }
 
   h1 {
     font-weight: 600;
@@ -113,6 +123,7 @@ p,
 
 form {
   font-weight: 500;
+  padding: 3rem;
 }
 .produceList {
   list-style: none;
@@ -121,4 +132,20 @@ form {
   flex-wrap: wrap;
   padding: 0;
   font-size: 12px;
+}
+@media screen and (max-width: 800px) {
+  .jumbotron {
+    height: 100%;
+    margin: 5rem 0 0 0;
+    div {
+      margin: 0;
+    }
+  }
+  form {
+    padding: 1rem;
+    margin: 0;
+    button {
+      margin: 10px;
+    }
+  }
 }
