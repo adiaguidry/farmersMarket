@@ -1,4 +1,4 @@
-![](img/portfolio/farmersMarket.png)
+![](src/images/farmersMarket.png)
 # ONLINE FARMERS MARKET PROJECT
 
 
